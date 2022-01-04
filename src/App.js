@@ -4,6 +4,7 @@ import FeedbackData from "./data/FeedbackData";
 import FeedbackList from "./components/FeedbackList";
 import FeedbackStats from "./components/FeedbackStats";
 import Header from "./components/Header";
+import FeedbackForm from "./components/FeedbackForm";
 
 function App() {
   const [feedData, setFeedData] = useState(FeedbackData);
@@ -16,9 +17,16 @@ function App() {
     }
   };
 
+  const addFeedback = (feedbackFormData) => {
+    console.log("new feedback:", feedbackFormData);
+    feedbackFormData.id = Math.floor(Math.random() * 100);
+    setFeedData([feedbackFormData, ...feedData]);
+  };
+
   return (
     <div className="feedback__app">
       <Header />
+      <FeedbackForm handleAdd={addFeedback} />
       <FeedbackStats feedData={feedData} />
       <FeedbackList feedData={feedData} handleDelete={deleteFeedback} />
     </div>
