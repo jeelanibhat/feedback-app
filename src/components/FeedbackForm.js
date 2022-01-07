@@ -5,11 +5,11 @@ const FeedbackForm = ({ handleAdd }) => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
   const [btnDisabled, setbtnDisable] = useState(true);
-  const [rating, setRating] = useState();
+  const [rating, setRating] = useState(10);
 
+  //   on submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("e :", e.target.value);
     const feedbackFormData = {
       text,
       rating,
@@ -18,19 +18,21 @@ const FeedbackForm = ({ handleAdd }) => {
     setText("");
     setbtnDisable(true);
   };
+
+  //   on change handler
   const handleTextChange = (e) => {
-    if (text == "") {
+    if (text === "") {
       setbtnDisable(true);
-    } else if (text != 0 && text.trim().length <= 10) {
+    } else if (text !== "" && text.trim().length <= 10) {
       setMessage("Text must be at least 10 characters");
       setbtnDisable(true);
     } else {
       setbtnDisable(false);
       setMessage(null);
     }
-
     setText(e.target.value);
   };
+
   return (
     <div className="feedback__form card">
       <form onSubmit={handleSubmit}>
