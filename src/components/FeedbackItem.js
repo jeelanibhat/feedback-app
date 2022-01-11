@@ -1,17 +1,23 @@
 import React from "react";
 import { FaTimes, FaEdit } from "react-icons/fa";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
 
-const FeedbackItem = ({ id, rating, text, handleDelete }) => {
+const FeedbackItem = ({ item, handleDelete }) => {
+  const { editFeedback } = useContext(FeedbackContext);
   return (
     <div className="feedbackitem__wrapper">
       <ul>
         <li className="card">
-          <p className="num-display">{rating}</p>
-          <button className="close" onClick={() => handleDelete(id)}>
+          <p className="num-display">{item.rating}</p>
+          <button className="close" onClick={() => handleDelete(item.id)}>
             <FaTimes color="purple" />
           </button>
-          <p>{text}</p>
+          <button className="edit" onClick={() => editFeedback(item)}>
+            <FaEdit color="purple" />
+          </button>
+          <p>{item.text}</p>
         </li>
       </ul>
     </div>

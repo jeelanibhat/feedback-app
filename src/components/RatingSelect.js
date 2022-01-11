@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import FeedbackContext from "../context/FeedbackContext";
+import ClickAudio from "./ClickAudio";
 
 const RatingSelect = ({ select }) => {
   const [selected, setSelected] = useState(10);
+  const { feedbackEdit } = useContext(FeedbackContext);
 
   const handleChange = (e) => {
     setSelected(+e.currentTarget.value);
     select(+e.currentTarget.value);
+
+    // play audio
+    let playAudio = document.getElementById("audioClick");
+    playAudio.play();
   };
+
+  useEffect(() => {
+    setSelected(feedbackEdit.item.rating);
+  }, [feedbackEdit]);
+
   return (
     <div className="rating__select">
       <ul className="rating">
@@ -121,6 +133,8 @@ const RatingSelect = ({ select }) => {
           <label htmlFor="num10">10</label>
         </li>
       </ul>
+      {/* audio clip */}
+      <ClickAudio />
     </div>
   );
 };

@@ -3,11 +3,11 @@ import FeedbackItem from "./FeedbackItem";
 import { useContext } from "react";
 import FeedbackContext from "../context/FeedbackContext";
 
-const FeedbackList = ({ handleDelete }) => {
-  const { feedback } = useContext(FeedbackContext);
-  console.log("feedback:", feedback);
+const FeedbackList = () => {
+  const { feedback, deleteFeedback, editFeedback } =
+    useContext(FeedbackContext);
 
-  if (feedback === "") {
+  if (feedback.length === 0) {
     return <h2 className="text-center">No Data Available</h2>;
   }
 
@@ -16,10 +16,9 @@ const FeedbackList = ({ handleDelete }) => {
       {feedback.map((item) => (
         <FeedbackItem
           key={item.id}
-          id={item.id}
-          rating={item.rating}
-          text={item.text}
-          handleDelete={handleDelete}
+          item={item}
+          handleDelete={deleteFeedback}
+          handleEdit={editFeedback}
         />
       ))}
     </div>

@@ -43,7 +43,7 @@ header {
   color: #333;
   border-radius: 15px;
   padding: 2rem;
-  margin: 20px 0;
+  margin: 20px;
   position: relative;
 }
 
@@ -75,8 +75,9 @@ header {
   text-align: center;
   border-radius: 50%;
   font-size: 19px;
-  border: 1px #eee solid;
+  border: 1px #202142 solid;
   transition: 0.3s;
+  box-shadow: 10px 10px 22px -8px #333;
 }
 
 .rating li label {
@@ -93,8 +94,9 @@ header {
 
 .rating li:hover,
 .num-display {
-  background: #ff6a95;
+  background: #202142;
   color: #fff;
+  transition: all 0.5s ease-in;
 }
 
 [type="radio"] {
@@ -102,7 +104,7 @@ header {
 }
 
 [type="radio"]:checked ~ label {
-  background: #ff6a95;
+  background: #202142;
   color: #fff;
 }
 
@@ -166,7 +168,7 @@ input:focus {
 }
 
 .btn-secondary {
-  background: #ff6a95;
+  background: #202142;
 }
 
 .btn:hover {
@@ -204,7 +206,7 @@ input:focus {
 }
 
 .about-link a:hover {
-  color: #ff6a95;
+  color: #202142;
 }
 
 .about h1 {
