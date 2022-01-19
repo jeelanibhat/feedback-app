@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# activation key for Github Copilot
+# vscode://vscode.github-authentication/did-authenticate?windowid=1&code=37a44b1fe84faca2df40&state=99b61f29-17f7-4607-99e3-9950435feec8

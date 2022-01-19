@@ -1,15 +1,25 @@
-import { createContext, useState } from "react";
-import FeedbackData from "../data/FeedbackData";
+import { createContext, useEffect, useState } from "react";
 
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
-  const [feedback, SetFeedback] = useState(FeedbackData);
+  const [feedback, SetFeedback] = useState([]);
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
     edit: false,
   });
   const [audioPlay, setAudioPlay] = useState(false);
+
+  useEffect(() => {
+    fetchFeedback();
+  }, []);
+
+  // Fetch Feedback
+  const fetchFeedback = async () => {
+    const fetchData = await fetch(`http://localhost:5000/feedback`);
+    const response = await fetchData.json();
+    SetFeedback(response);
+  };
 
   //   Delete Feedback
   const deleteFeedback = (id) => {

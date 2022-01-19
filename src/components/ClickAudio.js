@@ -3,11 +3,11 @@ import FeedbackContext from "../context/FeedbackContext";
 
 const ClickAudio = () => {
   const { audioPlay } = useContext(FeedbackContext);
+  let playAudio = document.getElementById("audioClick");
 
   useEffect(() => {
     // play audio
     if (audioPlay === true) {
-      let playAudio = document.getElementById("audioClick");
       playAudio.play();
     }
   }, [audioPlay]);
