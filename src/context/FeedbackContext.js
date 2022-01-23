@@ -22,8 +22,9 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   //   Delete Feedback
-  const deleteFeedback = (id) => {
+  const deleteFeedback = async (id) => {
     if (window.confirm("Are you sure you want to Delete")) {
+      await fetch(`http://localhost:5000/feedback/${id}`, { method: "DELETE" });
       console.log("Feedback List id:", id);
       const deleteResult = feedback.filter((item) => item.id !== id);
       SetFeedback(deleteResult);
@@ -41,20 +42,33 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   //   Update Feedback
-  const updateFeedback = (id, updatedFeedback) => {
+  const updateFeedback = async (id, updatedFeedback) => {
+    const response = await fetch(`http://localhost:5000/feedback/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedFeedback),
+    });
+    const data = await response.json();
+
     SetFeedback(
-      feedback.map((item) =>
-        item.id === id ? { ...item, ...updatedFeedback } : item
-      )
+      feedback.map((item) => (item.id === id ? { ...item, ...data } : item))
     );
     setAudioPlay(true);
   };
 
   //   Add Feedback
-  const addFeedback = (feedbackFormData) => {
-    console.log("new feedback:", feedbackFormData);
-    feedbackFormData.id = Math.floor(Math.random() * 100);
-    SetFeedback([feedbackFormData, ...feedback]);
+  const addFeedback = async (feedbackFormData) => {
+    const response = await fetch("http://localhost:5000/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(feedbackFormData),
+    });
+    const data = await response.json();
+    SetFeedback([data, ...feedback]);
     setAudioPlay(true);
   };
 
